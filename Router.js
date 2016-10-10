@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
+const React = require('react'),
+  ReactNative = require('react-native');
 
-import React from 'react-native'
 import BaseRouter from './BaseRouter';
 import ExRouter from './ExRouter';
-const {StyleSheet, View} = React;
+const {StyleSheet, View} = ReactNative;
 import debug from './debug';
 import Actions from './Actions';
 export default class Router extends React.Component {
