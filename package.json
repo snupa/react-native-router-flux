@@ -34,7 +34,7 @@
     }
   ],
   "dependencies": {
-    "@exponent/react-native-action-sheet": "0.1.2",
+    "@exponent/react-native-action-sheet": "0.2.0",
     "@exponent/react-native-navigator": "0.4.8",
     "react-native-tabs": "1.0.9"
   }
