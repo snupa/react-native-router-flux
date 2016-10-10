@@ -1,5 +1,11 @@
-import React from 'react-native'
-const {View, InteractionManager} = React;
+const React = require('react'),
+    ReactNative = require('react-native');
+const {
+  Component,
+  PropTypes
+} = React;
+
+const {View, InteractionManager} = ReactNative;
 import Tabs from 'react-native-tabs';
 
 import Actions from './Actions';
