@@ -69,11 +69,7 @@ class Actions {
             router = route.parent;
             debug("Switching to router="+router.name);
         }
-        debug("ROUTER DELEGATE PROPS:"+ router.delegate.props.dispatch)
         const currentRoute = router.routes[name];
-        if (router.delegate.props && router.delegate.props.dispatch){
-            router.delegate.props.dispatch({...props, type: BEFORE_ROUTE, route:currentRoute, name})
-        }
         if (router.route(name, props)){
             // deep into child router
             while (router.currentRoute.childRouter){
@@ -82,9 +78,6 @@ class Actions {
             }
 
             this.currentRouter = router;
-            if (router.delegate.props && router.delegate.props.dispatch){
-                router.delegate.props.dispatch({...props, type: AFTER_ROUTE, route:currentRoute, name})
-            }
             return true;
         }
         return false;
@@ -97,25 +90,13 @@ class Actions {
             router = router.parentRoute.parent;
             debug("Switching to parent router="+router.name);
         }
-        if (router.delegate.props && router.delegate.props.dispatch){
-            router.delegate.props.dispatch({...props, type: BEFORE_DISMISS, route:router.currentRoute, name:router.currentRoute.name})
-        }
         const res = router.dismiss();
-        if (router.delegate.props && router.delegate.props.dispatch){
-            router.delegate.props.dispatch({...props, type: AFTER_DISMISS, route:router.currentRoute, name:router.currentRoute.name})
-        }
         return res;
     }
     refresh(props: { [key: string]: any} = {}){
         props = filterParam(props);
         let router: BaseRouter = this.currentRouter;
-        if (router.delegate.props && router.delegate.props.dispatch){
-            router.delegate.props.dispatch({...props, type: BEFORE_REFRESH, route:router.currentRoute, name:router.currentRoute.name})
-        }
         const res = router.refresh(props);
-        if (router.delegate.props && router.delegate.props.dispatch){
-            router.delegate.props.dispatch({...props, type: AFTER_REFRESH, route:router.currentRoute, name:router.currentRoute.name})
-        }
         return res;
     }
     pop(num: number = 1, props: { [key: string]: any} = {}, parentRouter: BaseRouter){
@@ -146,15 +127,9 @@ class Actions {
               break;
             }
         }
-        if (router.delegate.props && router.delegate.props.dispatch){
-            router.delegate.props.dispatch({...props, type: BEFORE_POP, route:router.currentRoute, name:router.currentRoute.name})
-        }
         if (router.pop(num, props)){
             if (!parentRouter)
                 this.currentRouter = router;
-            if (router.delegate.props && router.delegate.props.dispatch){
-                router.delegate.props.dispatch({...props, type: AFTER_POP, route:router.currentRoute, name:router.currentRoute.name})
-            }
             return true;
         } else {
             return false;
