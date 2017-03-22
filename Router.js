@@ -37,13 +37,6 @@ export default class Router extends React.Component {
             let name = route.name;
             let title = route.title;
             Actions.currentRouter = this.router;
-
-            this.props.dispatch({
-              type: Actions.BEFORE_FOCUS,
-              name: name,
-              title: title,
-              route: route
-            });
           }.bind(this));
 
           this.router.delegate.refs.nav.navigationContext.addListener('didfocus', function (ev) {
@@ -51,12 +44,6 @@ export default class Router extends React.Component {
             let name = route.name;
             let title = route.title;
 
-            this.props.dispatch({
-              type: Actions.AFTER_FOCUS,
-              name: name,
-              title: title,
-              route: route
-            });
           }.bind(this));
         }
     }
